@@ -1,0 +1,44 @@
+#include<iostream>
+using namespace std;
+
+typedef struct ll{
+    int data;
+    struct ll* link;
+}node;
+
+node* XOR(node *x, node *y){
+    return (node*)((uintptr_t)(x)^(uintptr_t)(y));
+}
+
+void traverse(node* head){
+    node* current = head;
+    node* prev = nullptr;
+    node *next;
+    
+    while(current!=nullptr){
+        cout<<"data = "<<current->data<<"\tlink val = "<<current->link<<endl;
+        next = XOR(prev, current->link);
+        prev = current;
+        current = next;
+    }
+    cout<<"NULL";
+}
+
+void insert(node* &first, int value){
+    node* new_node = new node();
+    new_node->data = value;
+    new_node->link = XOR(first,nullptr);
+    
+    if(first)
+        first->link = XOR(new_node, XOR(first->link, NULL));
+    first=new_node;
+}
+
+int main(){
+    node *head=nullptr;
+    for(int i=0;i<5;i++){
+        insert(head,i);
+    }
+    traverse(head);
+    return 0;
+}
