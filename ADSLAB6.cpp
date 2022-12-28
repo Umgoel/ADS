@@ -1,4 +1,3 @@
-// #include <iostream>
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -138,18 +137,20 @@ void Node::splitChild(int i, Node *y) {
 }
 
 int main() {
-  BTree t(3);
-  t.insert(8);
-  t.insert(9);
-  t.insert(10);
-  t.insert(11);
-  t.insert(15);
-  t.insert(16);
-  t.insert(17);
-  t.insert(18);
-  t.insert(20);
-  t.insert(23);
-
-  cout << "The B-tree is: ";
-  t.traverse();
+  int ch, val, order;
+  cout<<"Enter order of tree ";
+  cin>>order;
+  BTree t(order);
+  cout<<"\n1. Insert values \n2. Display\n3.exit\nEnter your choice : ";
+  cin>>ch;
+  do{
+    cout<<"Enter value = ";
+    cin>>val;
+    t.insert(val);
+    cout<<"Enter your choice : ";
+    cin>>ch;
+  }while(ch==1);
+  if(ch==2)
+    t.traverse();
+  cout<<"\nProgram terminated";
 }
